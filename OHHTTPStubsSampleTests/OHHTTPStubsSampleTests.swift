@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import OHHTTPStubs
 @testable import OHHTTPStubsSample
 
 class OHHTTPStubsSampleTests: XCTestCase {
