@@ -52,4 +52,35 @@ class NetworkStubTests: XCTestCase {
     
     OHHTTPStubs.removeAllStubs()
   }
+
+  func testGetResourceFailure() {
+    // Arrange
+    //
+    // Setup network stubs
+    let testHost = "te.st"
+    let id = "42-abc"
+    let expectedError = NSError(domain: "test", code: 42, userInfo: .None)
+    stub(isHost(testHost) && isPath("/resources/\(id)")) { _ in
+      return OHHTTPStubsResponse(error: expectedError)
+    }
+    // Setup System Under Test
+    let client = APIClient(baseURL: NSURL(string: "http://\(testHost)")!)
+    let expectation = self.expectationWithDescription("calls the callback with an error")
+
+    // Act
+    //
+    client.getResource(withId: id) { resource, error in
+
+      // Assert
+      //
+      XCTAssertNil(resource)
+      XCTAssertEqual(error as? NSError, expectedError)
+
+      expectation.fulfill()
+    }
+
+    self.waitForExpectationsWithTimeout(0.3, handler: .None)
+
+    OHHTTPStubs.removeAllStubs()
+  }
 }
