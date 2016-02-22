@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3F2B30CF1C7315D100CE5AAB /* NetworkStubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B30CE1C7315D100CE5AAB /* NetworkStubTests.swift */; };
-		3F2B30D91C73A3C400CE5AAB /* GitHubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B30D81C73A3C400CE5AAB /* GitHubClient.swift */; };
+		3F2B30D91C73A3C400CE5AAB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B30D81C73A3C400CE5AAB /* APIClient.swift */; };
 		3F5900041C725FB0009BBAA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5900031C725FB0009BBAA0 /* AppDelegate.swift */; };
 		3F5900061C725FB0009BBAA0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5900051C725FB0009BBAA0 /* ViewController.swift */; };
 		3F5900091C725FB0009BBAA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5900071C725FB0009BBAA0 /* Main.storyboard */; };
 		3F59000B1C725FB0009BBAA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F59000A1C725FB0009BBAA0 /* Assets.xcassets */; };
 		3F59000E1C725FB0009BBAA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F59000C1C725FB0009BBAA0 /* LaunchScreen.storyboard */; };
-		3F5900191C725FB0009BBAA0 /* OHHTTPStubsSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5900181C725FB0009BBAA0 /* OHHTTPStubsSampleTests.swift */; };
 		3FC7D96A1C72618000E14882 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC7D95F1C72617400E14882 /* OHHTTPStubs.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,7 +85,7 @@
 
 /* Begin PBXFileReference section */
 		3F2B30CE1C7315D100CE5AAB /* NetworkStubTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStubTests.swift; sourceTree = "<group>"; };
-		3F2B30D81C73A3C400CE5AAB /* GitHubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubClient.swift; sourceTree = "<group>"; };
+		3F2B30D81C73A3C400CE5AAB /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		3F5900001C725FB0009BBAA0 /* OHHTTPStubsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OHHTTPStubsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5900031C725FB0009BBAA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F5900051C725FB0009BBAA0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 		3F59000D1C725FB0009BBAA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F59000F1C725FB0009BBAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F5900141C725FB0009BBAA0 /* OHHTTPStubsSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OHHTTPStubsSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F5900181C725FB0009BBAA0 /* OHHTTPStubsSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHHTTPStubsSampleTests.swift; sourceTree = "<group>"; };
 		3F59001A1C725FB0009BBAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC7D94F1C72617400E14882 /* OHHTTPStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHHTTPStubs.xcodeproj; path = Carthage/Checkouts/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +135,7 @@
 				3F59000A1C725FB0009BBAA0 /* Assets.xcassets */,
 				3F59000C1C725FB0009BBAA0 /* LaunchScreen.storyboard */,
 				3F59000F1C725FB0009BBAA0 /* Info.plist */,
-				3F2B30D81C73A3C400CE5AAB /* GitHubClient.swift */,
+				3F2B30D81C73A3C400CE5AAB /* APIClient.swift */,
 			);
 			path = OHHTTPStubsSample;
 			sourceTree = "<group>";
@@ -145,7 +143,6 @@
 		3F5900171C725FB0009BBAA0 /* OHHTTPStubsSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				3F5900181C725FB0009BBAA0 /* OHHTTPStubsSampleTests.swift */,
 				3F59001A1C725FB0009BBAA0 /* Info.plist */,
 				3F2B30CE1C7315D100CE5AAB /* NetworkStubTests.swift */,
 			);
@@ -347,7 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F2B30CF1C7315D100CE5AAB /* NetworkStubTests.swift in Sources */,
-				3F5900191C725FB0009BBAA0 /* OHHTTPStubsSampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F2B30D91C73A3C400CE5AAB /* GitHubClient.swift in Sources */,
+				3F2B30D91C73A3C400CE5AAB /* APIClient.swift in Sources */,
 				3F5900061C725FB0009BBAA0 /* ViewController.swift in Sources */,
 				3F5900041C725FB0009BBAA0 /* AppDelegate.swift in Sources */,
 			);
