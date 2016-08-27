@@ -1,4 +1,51 @@
 # OHHTTPStubs — CHANGELOG
+
+## [5.2.0](https://github.com/AliSoftware/OHHTTPStubs/releases/tag/5.2.0)
+
+* Added Swift 2.3/Xcode 8 support. This is compatible both Swift 2.2/Xcode 7.3 and Swift 2.3/Xcode 8.  
+  [@ikesyo](https://github.com/ikesyo), [#184](https://github.com/AliSoftware/OHHTTPStubs/pull/184)
+* Added Swift 3.0 support.  
+  [@mxcl](https://github.com/mxcl), [@Liquidsoul](https://github.com/Liquidsoul), [#192](https://github.com/AliSoftware/OHHTTPStubs/pull/192)
+* Set deployment targets at the project level to be used in a universal target.  
+  [@ikesyo](https://github.com/ikesyo), [#185](https://github.com/AliSoftware/OHHTTPStubs/pull/185)
+* Fix: Carthage support and Examples configurations.  
+  [@Liquidsoul](https://github.com/Liquidsoul), [#190](https://github.com/AliSoftware/OHHTTPStubs/issues/190)
+
+## [5.1.0](https://github.com/AliSoftware/OHHTTPStubs/releases/tag/5.1.0)
+
+* Bugfix: task completion block never called when not following redirects.  
+  [@adurdin](https://github.com/adurdin), [#175](https://github.com/AliSoftware/OHHTTPStubs/pull/175)
+* Declare in the project settings that the library contains swift code.  
+  [@rodericj](https://github.com/rodericj), [#173](https://github.com/AliSoftware/OHHTTPStubs/pull/173)
+* Adjusted parsing of Mocktail files to allow headers to start on line 4.  
+  [@Ashton-W](https://github.com/Ashton-W), [#172](https://github.com/AliSoftware/OHHTTPStubs/pull/172)
+* Allows access to the `HTTPBody` of POST request when using `NSURLSession`
+  [(Wiki entry)](https://github.com/AliSoftware/OHHTTPStubs/wiki/Testing-for-the-request-body-in-your-stubs)  
+  [@iosphere](https://github.com/iosphere/), [#166](https://github.com/AliSoftware/OHHTTPStubs/pull/166) [#180](https://github.com/AliSoftware/OHHTTPStubs/pull/180)
+
+## [5.0.0](https://github.com/AliSoftware/OHHTTPStubs/releases/tag/5.0.0)
+
+* Added `pathStartsWith(_:)` to the `Swift` helpers.  
+  [@sdduursma](https://github.com/sdduursma), [#163](https://github.com/AliSoftware/OHHTTPStubs/pull/163)
+* Added more logging blocks for debugging and better insight into when OHHTTPStubs returns stubs and redirects.  
+  [@jzucker2](https://github.com/jzucker2), [#161](https://github.com/AliSoftware/OHHTTPStubs/pull/161)
+* Added matchers that check whether a request has a particular header present, and a matcher to check if a request has a header with a key and value.  
+  [@hq-mobile](https://github.com/hq-mobile), [#160](https://github.com/AliSoftware/OHHTTPStubs/pull/160)
+
+_Note that this last change also changed the signature of the `onStubActivation:` (hence the bump to `5.0.0`) so you'll have to update your code if you used this for debugging your stubs._
+
+## [4.8.0](https://github.com/AliSoftware/OHHTTPStubs/releases/tag/4.8.0)
+
+* Added `isEnabled` and `isEnabledForSessionConfiguration` getter methods.  
+  [@jzucker2](https://github.com/jzucker2), [#159](https://github.com/AliSoftware/OHHTTPStubs/pull/159)
+
+## [4.7.1](https://github.com/AliSoftware/OHHTTPStubs/releases/tag/4.7.1)
+
+* Bumps OSX Deployment Target to 10.9 to add Swift support.  
+  [@JeanAzzopardi](https://github.com/JeanAzzopardi), [#154](https://github.com/AliSoftware/OHHTTPStubs/pull/154)
+* Added the `${CURRENT_PROJECT_VERSION}` to the `Info.plist` files of the`OHHTTPStubs.framework` so it matches what is expected by iTunes Connect.  
+  [@siemensikkema](https://github.com/siemensikkema), [#140](https://github.com/AliSoftware/OHHTTPStubs/pull/140)
+
 ## [4.7.0](https://github.com/AliSoftware/OHHTTPStubs/releases/tag/4.7.0)
 
 * Added `isMethodPATCH()` to the `Swift` helpers.  

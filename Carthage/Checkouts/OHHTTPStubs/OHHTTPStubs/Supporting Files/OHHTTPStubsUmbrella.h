@@ -23,6 +23,7 @@
  ***********************************************************************************/
 
 #import "Compatibility.h"
+#import "NSURLRequest+HTTPBodyTesting.h"
 #import "OHHTTPStubs.h"
 #import "OHHTTPStubsResponse.h"
 
