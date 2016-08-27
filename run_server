@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+pushd server
+
+bundle install
+bundle exec ruby server.rb
