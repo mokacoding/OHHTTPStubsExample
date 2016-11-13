@@ -28,6 +28,13 @@
 
 
 #if swift(>=3.0)
+  #if OHHTTPSTUBS_NSURLSESSION_HTTPBODY
+    extension URLRequest {
+        public var ohhttpStubs_httpBody: Data? {
+            return (self as NSURLRequest).ohhttpStubs_HTTPBody()
+        }
+    }
+  #endif
 #else
 #if swift(>=2.2)
     extension OHHTTPStubs {
@@ -70,9 +77,15 @@
  * - Returns: The `OHHTTPStubsResponse` instance that will stub with the given status code
  *            & headers, and use the file content as the response body.
  */
+#if swift(>=3.0)
+public func fixture(filePath: String, status: Int32 = 200, headers: [AnyHashable: Any]?) -> OHHTTPStubsResponse {
+    return OHHTTPStubsResponse(fileAtPath: filePath, statusCode: status, headers: headers)
+}
+#else
 public func fixture(filePath: String, status: Int32 = 200, headers: [NSObject: AnyObject]?) -> OHHTTPStubsResponse {
     return OHHTTPStubsResponse(fileAtPath: filePath, statusCode: status, headers: headers)
 }
+#endif
 
 /**
  * Helper to call the stubbing function in a more concise way?
@@ -83,9 +96,16 @@ public func fixture(filePath: String, status: Int32 = 200, headers: [NSObject: A
  * - Returns: The opaque `OHHTTPStubsDescriptor` that uniquely identifies the stub
  *            and can be later used to remove it with `removeStub:`
  */
+#if swift(>=3.0)
+@discardableResult
+public func stub(condition: @escaping OHHTTPStubsTestBlock, response: @escaping OHHTTPStubsResponseBlock) -> OHHTTPStubsDescriptor {
+    return OHHTTPStubs.stubRequests(passingTest: condition, withStubResponse: response)
+}
+#else
 public func stub(condition: OHHTTPStubsTestBlock, response: OHHTTPStubsResponseBlock) -> OHHTTPStubsDescriptor {
     return OHHTTPStubs.stubRequests(passingTest: condition, withStubResponse: response)
 }
+#endif
 
 
 
@@ -275,9 +295,15 @@ public func hasHeaderNamed(_ name: String, value: String) -> OHHTTPStubsTestBloc
  *
  * - Returns: a matcher (`OHHTTPStubsTestBlock`) that succeeds if either of the given matchers succeeds
  */
+#if swift(>=3.0)
+public func || (lhs: @escaping OHHTTPStubsTestBlock, rhs: @escaping OHHTTPStubsTestBlock) -> OHHTTPStubsTestBlock {
+    return { req in lhs(req) || rhs(req) }
+}
+#else
 public func || (lhs: OHHTTPStubsTestBlock, rhs: OHHTTPStubsTestBlock) -> OHHTTPStubsTestBlock {
     return { req in lhs(req) || rhs(req) }
 }
+#endif
 
 /**
  * Combine different `OHHTTPStubsTestBlock` matchers with an 'AND' operation.
@@ -287,9 +313,15 @@ public func || (lhs: OHHTTPStubsTestBlock, rhs: OHHTTPStubsTestBlock) -> OHHTTPS
  *
  * - Returns: a matcher (`OHHTTPStubsTestBlock`) that only succeeds if both of the given matchers succeeds
  */
+#if swift(>=3.0)
+public func && (lhs: @escaping OHHTTPStubsTestBlock, rhs: @escaping OHHTTPStubsTestBlock) -> OHHTTPStubsTestBlock {
+    return { req in lhs(req) && rhs(req) }
+}
+#else
 public func && (lhs: OHHTTPStubsTestBlock, rhs: OHHTTPStubsTestBlock) -> OHHTTPStubsTestBlock {
     return { req in lhs(req) && rhs(req) }
 }
+#endif
 
 /**
  * Create the opposite of a given `OHHTTPStubsTestBlock` matcher.
@@ -298,6 +330,12 @@ public func && (lhs: OHHTTPStubsTestBlock, rhs: OHHTTPStubsTestBlock) -> OHHTTPS
  *
  * - Returns: a matcher (OHHTTPStubsTestBlock) that only succeeds if the expr matcher fails
  */
+#if swift(>=3.0)
+public prefix func ! (expr: @escaping OHHTTPStubsTestBlock) -> OHHTTPStubsTestBlock {
+    return { req in !expr(req) }
+}
+#else
 public prefix func ! (expr: OHHTTPStubsTestBlock) -> OHHTTPStubsTestBlock {
     return { req in !expr(req) }
 }
+#endif
