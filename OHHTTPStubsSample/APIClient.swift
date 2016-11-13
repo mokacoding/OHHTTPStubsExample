@@ -17,14 +17,14 @@ struct Resource {
 
 class APIClient {
 
-  let baseURL: NSURL
-  var session: NSURLSession!
+  let baseURL: URL
+  var session: URLSession
 
-  init(baseURL: NSURL) {
+  init(baseURL: URL) {
     self.baseURL = baseURL
 
-    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-    self.session = NSURLSession(configuration: configuration)
+    let configuration = URLSessionConfiguration.default
+    self.session = URLSession(configuration: configuration)
   }
 
   enum Endpoint {
@@ -42,77 +42,77 @@ class APIClient {
       }
     }
 
-    func requestWithParameters(baseURL: NSURL, parameters: [String: AnyObject]) -> NSURLRequest? {
+    func requestWithParameters(baseURL: URL, parameters: [String: Any]) -> URLRequest? {
       switch self {
       case .GetResourceWithId:
         guard let id = parameters["id"] as? String else {
-          return .None
+          return .none
         }
 
-        let url = baseURL.URLByAppendingPathComponent(path).URLByAppendingPathComponent(id)
+        let url = baseURL.appendingPathComponent(path).appendingPathComponent(id)
 
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = method
+        var request = URLRequest(url: url)
+        request.httpMethod = method
 
         return request
       }
     }
   }
 
-  func performAPIRequest(endpoint: Endpoint, parameters: [String: AnyObject], completion: ([String: AnyObject]?, ErrorType?) -> ()) {
-    guard let request = endpoint.requestWithParameters(baseURL, parameters: parameters) else {
+  func performAPIRequest(endpoint: Endpoint, parameters: [String: Any], completion: @escaping ([String: Any]?, Error?) -> ()) {
+    guard let request = endpoint.requestWithParameters(baseURL: baseURL, parameters: parameters) else {
       // FIXME: This should return a proper error
-      completion(.None, .None)
+      completion(.none, .none)
       return
     }
 
-    let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+    let task = session.dataTask(with: request) { (data, response, error) -> Void in
       if let error = error {
-        completion(.None, error)
+        completion(.none, error)
         return
       }
 
       guard let data = data else {
         // FIXME: This should return a proper error
-        completion(.None, .None)
+        completion(.none, .none)
         return
       }
 
       do {
-        guard let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String: AnyObject] else {
+        guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
 
           return
         }
 
-        completion(json, .None)
+        completion(json, .none)
       } catch {
         // FIXME: This should return a proper error
-        completion(.None, .None)
+        completion(.none, .none)
       }
     }
 
     task.resume()
   }
 
-  func getResource(withId id: String, completion: (resource: Resource?, error: ErrorType?) -> ()) {
-    performAPIRequest(.GetResourceWithId, parameters: ["id": id]) { json, error in
+  func getResource(withId id: String, completion: @escaping (_ resource: Resource?, _ error: Error?) -> ()) {
+    performAPIRequest(endpoint: .GetResourceWithId, parameters: ["id": id]) { json, error in
       guard let json = json else {
-        completion(resource: .None, error: error)
+        completion(.none, error)
         return
       }
 
       guard let
         id = json["id"] as? String,
-        aProperty = json["foo"] as? String,
-        anotherProperty = json["bar"] as? String
+        let aProperty = json["foo"] as? String,
+        let anotherProperty = json["bar"] as? String
         else {
           // FIXME: This should return a proper error
-          completion(resource: .None, error: .None)
+          completion(.none, .none)
           return
       }
 
       let resource = Resource(id: id, aProperty: aProperty, anotherPropert: anotherProperty)
-      completion(resource: resource, error: .None)
+      completion(resource, .none)
     }
   }
 }

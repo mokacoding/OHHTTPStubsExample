@@ -9,7 +9,7 @@
 import XCTest
 @testable import OHHTTPStubsSample
 
-class NetworkStubTests: XCTestCase {
+class NetworkTests: XCTestCase {
 
   func testGetResourceSuccess() {
     // Arrange
@@ -24,8 +24,8 @@ class NetworkStubTests: XCTestCase {
     ]
 
     // Setup System Under Test
-    let client = APIClient(baseURL: NSURL(string: "http://\(testHost)")!)
-    let expectation = self.expectationWithDescription("calls the callback with a resource object")
+    let client = APIClient(baseURL: URL(string: "http://\(testHost)")!)
+    let expectation = self.expectation(description: "calls the callback with a resource object")
 
     // Act
     //
@@ -41,9 +41,7 @@ class NetworkStubTests: XCTestCase {
       expectation.fulfill()
     }
 
-    self.waitForExpectationsWithTimeout(0.3, handler: .None)
-
-    OHHTTPStubs.removeAllStubs()
+    self.waitForExpectations(timeout: 0.3, handler: .none)
   }
 
   func testGetResourceFailure() {

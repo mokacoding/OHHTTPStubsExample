@@ -23,16 +23,16 @@ class NetworkStubTests: XCTestCase {
       "foo": "some text",
       "bar": "some other text",
     ]
-    stub(isHost(testHost) && isPath("/resources/\(id)")) { _ in
+    stub(condition: isHost(testHost) && isPath("/resources/\(id)")) { _ in
       return OHHTTPStubsResponse(
-        JSONObject: stubbedJSON,
+        jsonObject: stubbedJSON,
         statusCode: 200,
-        headers: .None
+        headers: .none
       )
     }
     // Setup System Under Test
-    let client = APIClient(baseURL: NSURL(string: "http://\(testHost)")!)
-    let expectation = self.expectationWithDescription("calls the callback with a resource object")
+    let client = APIClient(baseURL: URL(string: "http://\(testHost)")!)
+    let expectation = self.expectation(description: "calls the callback with a resource object")
 
     // Act
     //
@@ -48,7 +48,7 @@ class NetworkStubTests: XCTestCase {
       expectation.fulfill()
     }
 
-    self.waitForExpectationsWithTimeout(0.3, handler: .None)
+    self.waitForExpectations(timeout: 0.3, handler: .none)
     
     OHHTTPStubs.removeAllStubs()
   }
@@ -59,13 +59,13 @@ class NetworkStubTests: XCTestCase {
     // Setup network stubs
     let testHost = "te.st"
     let id = "42-abc"
-    let expectedError = NSError(domain: "test", code: 42, userInfo: .None)
-    stub(isHost(testHost) && isPath("/resources/\(id)")) { _ in
+    let expectedError = NSError(domain: "test", code: 42, userInfo: .none)
+    stub(condition: isHost(testHost) && isPath("/resources/\(id)")) { _ in
       return OHHTTPStubsResponse(error: expectedError)
     }
     // Setup System Under Test
-    let client = APIClient(baseURL: NSURL(string: "http://\(testHost)")!)
-    let expectation = self.expectationWithDescription("calls the callback with an error")
+    let client = APIClient(baseURL: URL(string: "http://\(testHost)")!)
+    let expectation = self.expectation(description: "calls the callback with an error")
 
     // Act
     //
@@ -79,7 +79,7 @@ class NetworkStubTests: XCTestCase {
       expectation.fulfill()
     }
 
-    self.waitForExpectationsWithTimeout(0.3, handler: .None)
+    self.waitForExpectations(timeout: 0.3, handler: .none)
 
     OHHTTPStubs.removeAllStubs()
   }
